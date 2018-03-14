@@ -1,11 +1,20 @@
 class Pub
-  attr_reader :name, :till, :drinks, :foods
+  attr_reader :name, :till, :drinks, :foods, :drinks_stock
 
   def initialize(input_name, input_till, input_drinks, input_foods)
     @name = input_name
     @till = input_till
     @drinks = input_drinks
     @foods = input_foods
+    @drink_types = [:beer, :wine, :cider, :vodka, :martini]
+    @drinks_stock = {}
+
+    @drink_types.each {|dt| @drinks_stock[dt] = {count: 0, price: 0}}
+
+     for drink in @drinks
+       @drinks_stock[drink.name][:count] += 1
+       @drinks_stock[drink.name][:price] = drink.price
+     end
   end
 
 
@@ -27,5 +36,13 @@ class Pub
       return food if food.name == food_type
     end
     return "Food unavailable"
+  end
+
+  def drinks_stock_value()
+    sum =   0
+    @drink_types.each do |dt|
+      sum += @drinks_stock[dt][:price] * @drinks_stock[dt][:count]
+    end
+    return sum
   end
 end

@@ -9,7 +9,7 @@ class PubTest < MiniTest::Test
   def setup
     @food = [Food.new(:chips, 3), Food.new(:kebab, 7), Food.new(:salad, 5), Food.new(:pizza, 8)]
 
-    @drinks = [Drink.new(:beer, 5), Drink.new(:martini, 8), Drink.new(:cider, 4), Drink.new(:vodka, 3), Drink.new(:wine, 6)]
+    @drinks = [Drink.new(:beer), Drink.new(:martini), Drink.new(:cider), Drink.new(:vodka), Drink.new(:wine)]
 
     @pub1 = Pub.new("Hanging Bat", 100, @drinks, @food)
   end
@@ -54,5 +54,19 @@ class PubTest < MiniTest::Test
 
   def test_find_food_for_customer__fail
     assert_equal("Food unavailable", @pub1.find_food_for_customer(:noodles))
+  end
+
+  def test_stock
+    food = [Food.new(:chips, 3), Food.new(:kebab, 7), Food.new(:salad, 5), Food.new(:pizza, 8)]
+
+    drinks = [Drink.new(:beer), Drink.new(:martini), Drink.new(:cider), Drink.new(:vodka), Drink.new(:wine), Drink.new(:beer), Drink.new(:vodka), Drink.new(:vodka)]
+
+    pub2 = Pub.new("Hanging Bat", 100, drinks, food)
+
+    assert_equal(3, pub2.drinks_stock[:vodka][:count])
+  end
+
+  def test_drinks_stock_value
+    assert_equal(26, @pub1.drinks_stock_value)
   end
 end

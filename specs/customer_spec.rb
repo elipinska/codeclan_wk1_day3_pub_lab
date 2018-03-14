@@ -13,7 +13,7 @@ class CustomerTest < MiniTest::Test
 
     @food = [Food.new(:chips, 3), Food.new(:kebab, 7), Food.new(:salad, 5), Food.new(:pizza, 8)]
 
-    drinks = [Drink.new(:beer, 5), Drink.new(:martini, 8), Drink.new(:cider, 4), Drink.new(:vodka, 3), Drink.new(:wine, 6)]
+    drinks = [Drink.new(:beer), Drink.new(:martini), Drink.new(:cider), Drink.new(:vodka), Drink.new(:wine)]
 
     @pub1 = Pub.new("Hanging Bat", 100, drinks, @food)
   end
@@ -59,7 +59,7 @@ class CustomerTest < MiniTest::Test
   end
 
   def test_customer_buy_a_drink__too_drunk
-    drinks = [Drink.new(:vodka, 3), Drink.new(:vodka, 3), Drink.new(:vodka, 3), Drink.new(:beer, 5), Drink.new(:martini, 8), Drink.new(:cider, 4), Drink.new(:vodka, 3)]
+    drinks = [Drink.new(:vodka), Drink.new(:vodka), Drink.new(:vodka), Drink.new(:beer), Drink.new(:martini), Drink.new(:cider), Drink.new(:vodka)]
 
     @pub2 = Pub.new("Brass Monkey", 80, drinks, @food)
     @customer1.buy_a_drink(:vodka, @pub2)
