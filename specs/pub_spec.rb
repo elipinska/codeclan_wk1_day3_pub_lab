@@ -45,6 +45,14 @@ class PubTest < MiniTest::Test
   end
 
   def test_find_drink_for_customer__fail
-    assert_equal(nil, @pub1.find_drink_for_customer(:beer, 12, 70))
+    assert_equal("Drink unavailable", @pub1.find_drink_for_customer(:beer, 12, 70))
+  end
+
+  def test_find_food_for_customer__success
+    assert_equal(@food[2], @pub1.find_food_for_customer(:salad))
+  end
+
+  def test_find_food_for_customer__fail
+    assert_equal("Food unavailable", @pub1.find_food_for_customer(:noodles))
   end
 end

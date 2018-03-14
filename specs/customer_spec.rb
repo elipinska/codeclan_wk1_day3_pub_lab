@@ -89,4 +89,16 @@ class CustomerTest < MiniTest::Test
     assert_equal(3, @pub1.foods.count)
   end
 
+  def test_buy_food__not_in_stock
+    @customer1.buy_food(:cheeseboard, @pub1)
+    assert_equal(30, @customer1.wallet)
+    assert_equal(0, @customer1.drunkenness)
+  end
+
+  def test_buy_food__insufficient_funds
+    @customer2.buy_food(:kebab, @pub1)
+    assert_equal(2, @customer2.wallet)
+    assert_equal(0, @customer2.drunkenness)
+  end
+
 end

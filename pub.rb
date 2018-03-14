@@ -19,12 +19,13 @@ class Pub
         return drink if drink.name == drink_type
       end
     end
+    return "Drink unavailable"
   end
 
   def find_food_for_customer(food_type)
     for food in @foods
       return food if food.name == food_type
     end
+    return "Food unavailable"
   end
-
 end

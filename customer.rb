@@ -11,7 +11,7 @@ class Customer
 
     def buy_a_drink(drink_type, pub)
         drink_served = pub.find_drink_for_customer(drink_type, @age, @drunkenness)
-        return if drink_served == nil
+        return if drink_served == "Drink unavailable"
         if @wallet >= drink_served.price
           @wallet -= drink_served.price
           pub.receive_money(drink_served.price)
@@ -22,6 +22,7 @@ class Customer
 
     def buy_food(food_type, pub)
       food_served = pub.find_food_for_customer(food_type)
+      return if food_served == "Food unavailable"
       if @wallet >= food_served.price
         pub.foods.delete(food_served)
         @wallet -= food_served.price
@@ -29,6 +30,4 @@ class Customer
         @drunkenness -= food_served.rejuvenation_level
       end
     end
-
-
 end
