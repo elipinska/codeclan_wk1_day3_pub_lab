@@ -44,14 +44,6 @@ class CustomerTest < MiniTest::Test
     assert_equal(5, @pub1.drinks.length)
   end
 
-  def test_old_enough__true
-    assert_equal(true, @customer1.old_enough?)
-  end
-
-  def test_old_enough__false
-    assert_equal(false, @customer3.old_enough?)
-  end
-
   def test_customer_buy_a_drink__under_age
     @customer3.buy_a_drink(:cider, @pub1)
     assert_equal(15, @customer3.wallet)
