@@ -10,22 +10,26 @@ class Pub
     @food_types = [:kebab, :chips, :salad, :pizza]
     @stock = {drinks: {}, food: {}}
 
-    @drink_types.each {|dt| @stock[:drinks][dt] = {count: 0, price: 0}}
-
-     for drink in @drinks
-       @stock[:drinks][drink.name][:count] += 1
-       @stock[:drinks][drink.name][:price] = drink.price
-     end
-
-    @food_types.each {|ft| @stock[:food][ft] = {count: 0, price: 0}}
-
-    for food in @foods
-      @stock[:food][food.name][:count] += 1
-      @stock[:food][food.name][:price] = food.price
-    end
+    refresh_stock()
 
   end
 
+def refresh_stock()
+  @drink_types.each {|dt| @stock[:drinks][dt] = {count: 0, price: 0}}
+
+   for drink in @drinks
+     @stock[:drinks][drink.name][:count] += 1
+     @stock[:drinks][drink.name][:price] = drink.price
+   end
+
+  @food_types.each {|ft| @stock[:food][ft] = {count: 0, price: 0}}
+
+  for food in @foods
+    @stock[:food][food.name][:count] += 1
+    @stock[:food][food.name][:price] = food.price
+  end
+
+end
 
   def receive_money(amount)
     @till += amount

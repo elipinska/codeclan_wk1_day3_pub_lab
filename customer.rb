@@ -17,6 +17,7 @@ class Customer
           pub.receive_money(drink_served.price)
           pub.drinks.delete(drink_served)
           @drunkenness += drink_served.alcohol_level
+          pub.refresh_stock()
       end
     end
 
@@ -28,6 +29,7 @@ class Customer
         @wallet -= food_served.price
         pub.receive_money(food_served.price)
         @drunkenness -= food_served.rejuvenation_level
+        pub.refresh_stock()
       end
     end
 end
