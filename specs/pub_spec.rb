@@ -12,6 +12,7 @@ class PubTest < MiniTest::Test
     @drinks = [Drink.new(:beer), Drink.new(:martini), Drink.new(:cider), Drink.new(:vodka), Drink.new(:wine)]
 
     @pub1 = Pub.new("Hanging Bat", 100, @drinks, @food)
+    @customer1 = Customer.new("Ewa", 30, 27)
   end
 
   def test_pub_has_name
@@ -72,5 +73,15 @@ class PubTest < MiniTest::Test
 
   def test_food_stock_value
     assert_equal(23, @pub1.foods_stock_value)
+  end
+
+  def test_drinks_stock_value__after_purchase
+    @customer1.buy_a_drink(:wine, @pub1)
+    assert_equal(20, @pub1.drinks_stock_value)
+  end
+
+  def test_food_stock_value__after_purchase
+    @customer1.buy_food(:pizza, @pub1)
+    assert_equal(15, @pub1.foods_stock_value)
   end
 end
