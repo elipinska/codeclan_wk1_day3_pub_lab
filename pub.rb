@@ -1,5 +1,5 @@
 class Pub
-  attr_reader :name, :till, :drinks, :foods, :drinks_stock
+  attr_reader :name, :till, :drinks, :foods, :stock
 
   def initialize(input_name, input_till, input_drinks, input_foods)
     @name = input_name
@@ -7,14 +7,23 @@ class Pub
     @drinks = input_drinks
     @foods = input_foods
     @drink_types = [:beer, :wine, :cider, :vodka, :martini]
-    @drinks_stock = {}
+    @food_types = [:kebab, :chips, :salad, :pizza]
+    @stock = {drinks: {}, food: {}}
 
-    @drink_types.each {|dt| @drinks_stock[dt] = {count: 0, price: 0}}
+    @drink_types.each {|dt| @stock[:drinks][dt] = {count: 0, price: 0}}
 
      for drink in @drinks
-       @drinks_stock[drink.name][:count] += 1
-       @drinks_stock[drink.name][:price] = drink.price
+       @stock[:drinks][drink.name][:count] += 1
+       @stock[:drinks][drink.name][:price] = drink.price
      end
+
+    @food_types.each {|ft| @stock[:food][ft] = {count: 0, price: 0}}
+
+    for food in @foods
+      @stock[:food][food.name][:count] += 1
+      @stock[:food][food.name][:price] = food.price
+    end
+
   end
 
 
@@ -41,7 +50,15 @@ class Pub
   def drinks_stock_value()
     sum =   0
     @drink_types.each do |dt|
-      sum += @drinks_stock[dt][:price] * @drinks_stock[dt][:count]
+      sum += @stock[:drinks][dt][:price] * @stock[:drinks][dt][:count]
+    end
+    return sum
+  end
+
+  def foods_stock_value()
+    sum =   0
+    @food_types.each do |ft|
+      sum += @stock[:food][ft][:price] * @stock[:food][ft][:count]
     end
     return sum
   end

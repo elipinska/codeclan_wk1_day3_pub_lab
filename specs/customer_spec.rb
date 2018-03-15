@@ -11,7 +11,7 @@ class CustomerTest < MiniTest::Test
     @customer2 = Customer.new("Ben", 2, 35)
     @customer3 = Customer.new("Anna", 15, 16)
 
-    @food = [Food.new(:chips, 3), Food.new(:kebab, 7), Food.new(:salad, 5), Food.new(:pizza, 8)]
+    @food = [Food.new(:chips), Food.new(:kebab), Food.new(:salad), Food.new(:pizza)]
 
     drinks = [Drink.new(:beer), Drink.new(:martini), Drink.new(:cider), Drink.new(:vodka), Drink.new(:wine)]
 

@@ -3,7 +3,7 @@ require_relative('../food')
 
 class FoodTest < MiniTest::Test
   def setup
-    @food1 = Food.new(:kebab, 7)
+    @food1 = Food.new(:kebab)
   end
 
   def test_food_has_name_price_and_rejuvenation_level

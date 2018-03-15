@@ -7,7 +7,7 @@ require_relative('../food')
 class PubTest < MiniTest::Test
 
   def setup
-    @food = [Food.new(:chips, 3), Food.new(:kebab, 7), Food.new(:salad, 5), Food.new(:pizza, 8)]
+    @food = [Food.new(:chips), Food.new(:kebab), Food.new(:salad), Food.new(:pizza)]
 
     @drinks = [Drink.new(:beer), Drink.new(:martini), Drink.new(:cider), Drink.new(:vodka), Drink.new(:wine)]
 
@@ -57,16 +57,20 @@ class PubTest < MiniTest::Test
   end
 
   def test_stock
-    food = [Food.new(:chips, 3), Food.new(:kebab, 7), Food.new(:salad, 5), Food.new(:pizza, 8)]
+    food = [Food.new(:chips), Food.new(:kebab), Food.new(:salad), Food.new(:pizza)]
 
     drinks = [Drink.new(:beer), Drink.new(:martini), Drink.new(:cider), Drink.new(:vodka), Drink.new(:wine), Drink.new(:beer), Drink.new(:vodka), Drink.new(:vodka)]
 
     pub2 = Pub.new("Hanging Bat", 100, drinks, food)
 
-    assert_equal(3, pub2.drinks_stock[:vodka][:count])
+    assert_equal(3, pub2.stock[:drinks][:vodka][:count])
   end
 
   def test_drinks_stock_value
     assert_equal(26, @pub1.drinks_stock_value)
+  end
+
+  def test_food_stock_value
+    assert_equal(23, @pub1.foods_stock_value)
   end
 end
