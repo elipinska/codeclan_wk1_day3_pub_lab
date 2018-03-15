@@ -51,6 +51,15 @@ end
     return "Food unavailable"
   end
 
+  def remove_from_stock(item)
+    if @drink_types.include?(item.name)
+      @drinks.delete(item)
+    elsif @food_types.include?(item.name)
+      @foods.delete(item)
+    end
+    refresh_stock()
+  end
+
   def drinks_stock_value()
     sum =   0
     @drink_types.each do |dt|

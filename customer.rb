@@ -15,9 +15,8 @@ class Customer
         if @wallet >= drink_served.price
           @wallet -= drink_served.price
           pub.receive_money(drink_served.price)
-          pub.drinks.delete(drink_served)
+          pub.remove_from_stock(drink_served)
           @drunkenness += drink_served.alcohol_level
-          pub.refresh_stock()
       end
     end
 
@@ -25,11 +24,10 @@ class Customer
       food_served = pub.find_food_for_customer(food_type)
       return if food_served == "Food unavailable"
       if @wallet >= food_served.price
-        pub.foods.delete(food_served)
-        @wallet -= food_served.price
         pub.receive_money(food_served.price)
+        pub.remove_from_stock(food_served)
+        @wallet -= food_served.price
         @drunkenness -= food_served.rejuvenation_level
-        pub.refresh_stock()
       end
     end
 end
